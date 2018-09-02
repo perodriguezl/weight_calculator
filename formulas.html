@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery.js"></script>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery-migrate.min.js"></script>
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/style.css" type="text/css" media="all">
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/core-styles.css" type="text/css" media="all">
+</head>
+
+<body>
+    <div style="" class="vc_col-sm-12 calc-content wpb_column column_container  _ height-full">
+        <h4 style="text-align: left;"><span style="color: #333333;">CARBON EQUIVALENCY FORMULA</span></h4>
+        <div class="clearboth"></div>
+        <style>
+        #fancy-title-7 {
+            font-family: "Anton"
+        }
+        </style>
+        <div id="text-block-8" class="mk-text-block">
+            <div class="black-body">
+                <div class="calcbody metric">
+                    C&nbsp;&nbsp;&nbsp;= <input type="text" id="c" class="metric-input"> V&nbsp;&nbsp;&nbsp;= <input type="text" id="v" class="metric-input"><br/>
+                    Mn = <input type="text" id="mn" class="metric-input"> Cu = <input type="text" id="cu" class="metric-input"><br/>
+                    Cr&nbsp;&nbsp; = <input type="text" id="cr" class="metric-input"> Ni = <input type="text" id="ni" class="metric-input"><br/>
+                    Mo = <input type="text" id="mo" class="metric-input"><br/>
+                    <button id="carbonCalculation">Calculate</button>&nbsp;&nbsp; Carbon Equiv = <input readonly="true" type="text" id="result" class="metric-input">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearboth"></div>
+        </div>
+        <div class="wpb_raw_code wpb_raw_js">
+            <div class="wpb_wrapper">
+                <script type="text/javascript">
+                function carbon() {
+                    var answer;
+                    answer = getNumber(jQuery('#c').val()) + getNumber((jQuery('#mn').val()) / 6) + ((getNumber(jQuery('#cr').val()) + getNumber(jQuery('#mo').val()) + getNumber(jQuery('#v').val())) / 5) + ((getNumber(jQuery('#cu').val()) + getNumber(jQuery('#ni').val())) / 15);
+                    console.log(answer);
+                    jQuery('#result').val(answer);
+                }
+                function getNumber(val) {
+                    val = reSpace(val);
+                    tempval = eval(val);
+                    return parseFloat(tempval);
+                }
+                function reSpace(entry) {
+                    out = " "; // replace this
+                    add = "+"; // with this
+                    temp = "" + entry; // temporary holder
+
+                    while (temp.indexOf(out) > -1) {
+                        pos = temp.indexOf(out);
+                        temp = "" + (temp.substring(0, pos) + add +
+                            temp.substring((pos + out.length), temp.length));
+                    }
+                    return temp;
+                }
+                jQuery('#carbonCalculation').on('click', function() {
+                    carbon();
+                });
+                </script>
+            </div>
+        </div>
+        <h4 style="text-align: left;"><span style="color: #333333;">PCM FORMULA</span></h4>
+        <div class="clearboth"></div>
+        <style>
+        #fancy-title-7 {
+            font-family: "Anton"
+        }
+        </style>
+        <div id="text-block-8" class="mk-text-block">
+            <div class="black-body">
+                <div class="calcbody metric">
+                    C &nbsp;= <input type="text" id="p_c" class="metric-input"> Ni&nbsp;&nbsp;&nbsp;= <input type="text" id="p_ni" class="metric-input"><br/>
+                    Si&nbsp; = <input type="text" id="p_si" class="metric-input"> Mo = <input type="text" id="p_mo" class="metric-input"><br/>
+                    Mn = <input type="text" id="p_mn" class="metric-input"> V = <input type="text" id="p_v" class="metric-input"><br/>
+                    Cu&nbsp; = <input type="text" id="p_cu" class="metric-input"> B = <input type="text" id="p_b" class="metric-input"><br/>
+                    Cr&nbsp;&nbsp; = <input type="text" id="p_cr" class="metric-input"><br/>
+                    <button id="pcmCalculation">Calculate</button>&nbsp;&nbsp; PcM = <input readonly="true" type="text" id="p_result" class="metric-input">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearboth"></div>
+        </div>
+        <div class="wpb_raw_code wpb_raw_js">
+            <div class="wpb_wrapper">
+                <script type="text/javascript">
+                function pcm() {
+                    var answer;
+                    answer = getNumber(jQuery('#c').val()) + getNumber((jQuery('#mn').val()) / 6) + ((getNumber(jQuery('#cr').val()) + getNumber(jQuery('#mo').val()) + getNumber(jQuery('#v').val())) / 5) + ((getNumber(jQuery('#cu').val()) + getNumber(jQuery('#ni').val())) / 15);
+                    answer = getNumber(jQuery('#p_c').val()) + (getNumber(jQuery('#p_si').val()) / 30) + ((getNumber(jQuery('#p_mn').val()) + getNumber(jQuery('#p_cu').val()) + getNumber(jQuery('#p_cr').val())) / 20) + (getNumber(jQuery('#p_ni').val()) / 60) + (getNumber(jQuery('#p_mo').val()) / 15) + (getNumber(jQuery('#p_v').val()) / 10) + (getNumber(jQuery('#p_b').val()) * 5);
+                    console.log(answer);
+                    jQuery('#p_result').val(answer);
+                }
+                jQuery('#pcmCalculation').on('click', function() {
+                    pcm();
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

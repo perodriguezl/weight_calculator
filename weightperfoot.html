@@ -1,0 +1,289 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery.js"></script>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery-migrate.min.js"></script>
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/core-styles.css" type="text/css" media="all">
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/style.css" type="text/css" media="all">
+</head>
+
+<body>
+    <div style="" class="vc_col-sm-12 calc-content wpb_column column_container  _ height-full">
+    <div class="mk-grid">
+        <div style="" class="vc_col-sm-12 calc-content wpb_column column_container  _ height-full">
+            <style>
+            #fancy-title-7 {
+                font-family: "Anton"
+            }
+            </style>
+            <div id="text-block-8" class="mk-text-block   ">
+                <div class="black-body">
+                    <div class="calcbody wpf">
+                        <div id="math-form">
+                            <select id="metric" class="metric-select">
+                                <option value="1" selected="">SQUARE &amp; RECTANGLES BAR</option>
+                                <option value="2">HEXAGON TUBE</option>
+                                <option value="3">OCTAGON</option>
+                                <option value="4">OCTAGON BAR</option>
+                                <option value="5">ROUND TUBE</option>
+                                <option value="6">ROUND BAR</option>
+                                <option value="7">SQUARES RECTANGLES TUBE</option>
+                                <option value="8">HEXAGONAL BAR</option>
+                            </select>
+                            <br>
+                            <div id="almn_select" class="almn">
+                                <span class="small">Aluminum</span>
+                                <input type="checkbox" name="alm" id="alm">
+                            </div>
+                            <div class="almn">
+                                <span class="guage large">Gauge</span>
+                                <select id="guage" class="guage metric-select">
+                                    <option value="0.3462">1100</option>
+                                    <option value="0.3604">2011</option>
+                                    <option value="0.3568">2014</option>
+                                    <option value="0.3568">2017</option>
+                                    <option value="0.3533">2024</option>
+                                    <option value="0.3498">3003</option>
+                                    <option value="0.3462">5005</option>
+                                    <option value="0.3427">5052</option>
+                                    <option value="0.3356">5056</option>
+                                    <option value="0.3392">5083</option>
+                                    <option value="0.3392">5086</option>
+                                    <option value="0.3462">6061</option>
+                                    <option value="0.3462">6063</option>
+                                    <option value="0.3568">7075</option>
+                                    <option value="0.3604">7178</option>
+                                </select>
+                            </div>
+                            <ul class="fcfields">
+                                <li class="fcfield">
+                                    <span class="large width formcalc" style="display: none;"> Width / Diameter </span>
+                                    <input type="text" id="width" class="width formcalc" style="display: none;" value="">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large height formcalc" style="display: none;">Height</span>
+                                    <input type="text" id="height" class="height formcalc" value="" style="display: none;">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large thick formcalc" style="display: none;">Thickness</span>
+                                    <input type="text" id="thick" class="thick formcalc" style="display: none;" value="">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large od formcalc" style="display: block;">Outside Diameter</span>
+                                    <input type="text" id="od" class="od formcalc" value="" style="display: inline-block;">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large id formcalc" style="display: none;">Inside Diameter</span>
+                                    <input type="text" id="id" class="id formcalc" value="" style="display: none;">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large wall formcalc" style="display: none;">Wall</span>
+                                    <input type="text" id="wall" class="wall formcalc" value="" style="display: none;">
+                                </li>
+                                <li class="wpf-calc">
+                                    <input type="button" name="calc" id="calc" class="total" value="Calculate">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large total">Total</span>
+                                    <input type="text" id="total" class="total" value="">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p class="real_small">*For exact requirements contact our sales person.</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearboth"></div>
+            </div>
+            <div class="wpb_raw_code wpb_raw_js">
+                <div class="wpb_wrapper">
+                    <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        jQuery('.guage').hide();
+                        jQuery('.od').hide();
+                        jQuery(function() {
+
+                            var type = '1';
+
+                            jQuery('.width').show();
+                            jQuery('.thick').show();
+                            jQuery('.total').show();
+
+                            jQuery('#metric').live('change', function() {
+                                // Remove all form values && hide all forms
+                                jQuery('input[type=text]').attr('value', '');
+                                jQuery('.formcalc').hide();
+
+                                buildForm(jQuery(this).val());
+                            });
+
+                            jQuery('input[type=text]').live('keyup', function() {
+                                var val = jQuery(this).val();
+                                val = val.replace(/[^0-9\.]+/g, '');
+                                jQuery(this).attr('value', val);
+                            });
+
+                            jQuery('#calc').live('click', function() {
+                                doMath(jQuery('#metric').val());
+                            });
+
+                            jQuery('#alm').live('click', function() {
+                                if (jQuery(this).attr('checked') == 'checked') {
+                                    jQuery('.guage').show();
+                                } else {
+                                    jQuery('.guage').hide();
+                                }
+                            });
+
+                            function alm() {
+                                if (jQuery('#alm').attr('checked') == 'checked') {
+                                    return jQuery('#guage').val();
+                                } else {
+                                    return false;
+                                }
+                            }
+
+                            function doMath(i) {
+                                switch (i) {
+
+                                    case '1':
+
+                                        var total = jQuery('#width').val() * jQuery('#thick').val() * 3.4036;
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '2':
+
+                                        var total = ((jQuery('#od').val() - jQuery('#wall').val()) * jQuery('#wall').val()) * 11.780;
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '3':
+
+                                        var total = ((jQuery('#od').val() - jQuery('#wall').val()) * jQuery('#wall').val()) * 11.27;
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '4':
+
+                                        var total = jQuery('#od').val() * jQuery('#od').val() * 2.8193;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '5':
+
+                                        var total = ((jQuery('#od').val() - jQuery('#wall').val()) * jQuery('#wall').val()) * 10.68;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '6':
+
+                                        var total = jQuery('#od').val() * jQuery('#od').val() * 2.6729;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '7':
+                                        var total = ((((Number(jQuery('#width').val()) + Number(jQuery('#height').val())) / 2) - jQuery('#wall').val() * 1.6451) * jQuery('#wall').val()) * 13.61108;
+                                        var guage = alm();
+
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '8':
+
+                                        var total = jQuery('#width').val() * jQuery('#width').val() * 2.9473;
+                                        var guage = alm();
+
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#total').attr('value', total.toFixed(3));
+                                        break;
+                                }
+                            }
+
+                            function buildForm(i) {
+                                switch (i) {
+                                    case '1':
+                                        jQuery('.width').show();
+                                        jQuery('.thick').show();
+                                        break;
+
+                                    case '2':
+                                    case '3':
+                                    case '5':
+                                        jQuery('.od').show();
+                                        jQuery('.wall').show();
+                                        break;
+
+                                    case '4':
+                                        jQuery('.od').show();
+
+                                        break;
+                                    case '6':
+                                        jQuery('.od').show();
+                                        break;
+                                    case '7':
+                                        jQuery('.width').show();
+                                        jQuery('.height').show();
+                                        jQuery('.wall').show();
+                                        break;
+                                    case '8':
+                                        jQuery('.width').show();
+                                        break;
+                                }
+                            }
+
+                        });
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+/*
+Theme Name:     Jupiter Child Theme
+Theme URI: 		http://themeforest.net/user/artbees
+Description:    Child theme for the Jupiter theme 
+Author:         Your name here
+Theme URI: 		http://themeforest.net/user/artbees
+Template:       jupiter
+Version:        1.0
+*/
+
+/*
+New Styles
+*/
+
+
+
+/*
+Imported Calculator Styles from Old Site
+*/
+
+#metric {
+	display: block;
+	float: left;
+	margin-right: 20px;
+	margin-top: 15px !important;
+}
+
+.metric-input {
+	margin-top: 15px;
+}
+
+.metric-label {
+	font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    top: 10px;
+}
+
+ul.fcfields,
+ul.calc-list {
+	margin: 0;
+    padding: 0;
+}
+
+#math-form ul li,
+ul.calc-list li {
+	clear: both;
+	margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#math-form span.large {
+	width: 200px;
+	float: left;
+}
+
+#math-form .guage {
+	display: none;
+}
+
+.formcalc {
+	display: none;
+}
+
+#almn_select {
+	width: 100%;
+	float: left;
+	display: block;
+	clear: both;
+}
+
+#almn_select.small {
+	margin-right: 15px;
+	float: left;
+}
+
+.almm {
+	display: block;
+	margin: 0px;
+}
+
+.almn .large {
+	line-height:15px;
+}
+
+#calc {
+	vertical-align: middle;
+	height:40px;
+	padding:10px;
+}
+
+.calc-txt a {
+	color:#d41921 !important;
+}
+
+.wpf-calc {
+	text-align: right;
+	padding-right: 6px
+}
+
+.fcfield input {
+	width: 180px;
+}
+
+.fcfield .large {
+	margin-top: -7px;
+}
+
+.calcbody {
+	width: 96%;
+	padding: 0 2%;
+	max-width: 800px;
+	line-height: 50px;
+	vertical-align: middle;
+	border: 1px solid #eaeaea;
+	/* margin: 0px auto ;*/
+	padding-bottom:30px;
+}
+
+.calcbody.wpf {
+	width: 96%;
+	padding: 0 2%;
+	max-width: 380px;
+}
+.calcbody.cutting {
+	width: 96%;
+	padding: 0 2%;
+	max-width: 600px;
+}
+
+.calcbody.metric {
+	padding-top: 15px;
+}
+
+.rdohx {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+.rdohx input{
+	position:absolute;
+	top: 20px;
+}
+.rdohx .small {
+	margin-left:20px;
+}
+.header_small {
+	height:20px;
+}
+
+
+@media handheld, only screen and (max-width: 1024px) {
+
+	.mk-page-section.steel-banner:not(.mk-adaptive-height):not(.intro-true) {
+		height: 145px !important;
+	}
+
+	.mk-button .mk-button--text {
+		line-height: normal;
+	}
+
+	h1.mk-fancy-title {
+		margin-top: -50px;
+	}
+
+	.s_corporate #mk-contact-form-33 .contact-submit {
+		float: left;
+		margin-left: 7px;
+	}
+
+}
+
+@media handheld, only screen and (max-width: 767px) {
+	.mk-button-container {
+	  text-align: left;
+	}
+
+	/*	.wpb_wrapper h1.mk-fancy-title {
+		font-size: 26px;
+	}*/
+
+	.vc_col-sm-12.calc-content.wpb_column.column_container {
+		padding-left:15px !important;
+		padding-right:15px !important;
+	}
+
+	.no-padding {
+		padding: 0 !important;
+	}
+
+	.cta-block-home h1#fancy-title-7,
+	.cta-block-home h1#fancy-title-27 {
+		text-align: left !important;
+		font-size: 30px !important;
+		margin-top: -80px;
+		word-break: normal;
+	}
+
+	.left-mobile {
+		text-align: left !important;
+	}
+
+	.cta-block-home {
+		margin-top: -25px;
+		text-align: left;
+	}
+
+	.cta-block-home h1,
+	.cta-block-home .mk-text-block p {
+		text-align: left;
+	}
+
+	.cta-block,
+	.cta-block-last {
+		display: block;
+		width: 100%;
+		float: left;
+		clear: both;
+		text-align: left;
+		padding-bottom: 90px;
+	}
+
+	.cta-block-last {
+		padding-bottom: 0;
+	}
+
+	.page-id-441 .cta-block {
+		padding-bottom: 30px;
+	}
+
+	.page-id-441 .mk-page-section .vc_row-fluid {
+		display: block;
+		width: 100%;
+		float: left;
+		clear: both;
+		padding-top: 30px;
+	}
+
+/*	.cta-block .mk-padding-divider,
+	.cta-block-last .mk-padding-divider {
+		height: 20px !important;
+	}*/
+
+	.cta-block .mk-button-container,
+	.cta-block-last .mk-button-container {
+		text-align: left;
+	}
+
+	.cta-block h2 {
+		text-align: left !important;
+	}
+
+	.cta-block:nth-last-child(1) {
+		padding-bottom: 0;
+	}
+}
+
+.mk-page-section:not(.mk-adaptive-height):not(.intro-true).home-banner {
+	height: calc(99vh - 167px) !important;
+}
+
+@media all and (max-width: 768px) {
+
+.mk-page-section:not(.mk-adaptive-height):not(.intro-true).home-banner {
+	height: 500px !important;
+}
+
+#padding-3 {
+	height: 200px !important;
+}
+	
+}
+
+

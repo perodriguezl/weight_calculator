@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery.js"></script>
+    <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery-migrate.min.js"></script>
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/style.css" type="text/css" media="all">
+    <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/core-styles.css" type="text/css" media="all">
+</head>
+
+<body>
+    <div style="" class="vc_col-sm-12 calc-content wpb_column column_container  _ height-full">
+        <style>
+        #fancy-title-7 {
+            font-family: "Anton"
+        }
+        </style>
+        <div id="text-block-8" class="mk-text-block">
+            <div class="black-body">
+                <div class="calcbody metric">
+                    <select id="metric" class="metric-select">
+                        <option value="1" selected="">Millimeters to Inches</option>
+                        <option value="2">Inches to Millimeters</option>
+                        <option value="3">Meters to Feet</option>
+                        <option value="4">Feet to Meters</option>
+                        <option value="5">Lbs to Kilograms</option>
+                        <option value="6">Grams to Lbs</option>
+                        <option value="7">Short Tons to Metric Tons</option>
+                        <option value="8">Metric Tons to Short Tons</option>
+                        <option value="9">MPa to PSI</option>
+                    </select>
+                    <input type="text" id="cfrom" class="metric-input" value="1">
+                    <span class="large metric-label"> = </span>
+                    <input type="text" id="cto" class="metric-input" value="25.4">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearboth"></div>
+        </div>
+        <div class="wpb_raw_code wpb_raw_js">
+            <div class="wpb_wrapper">
+                <script type="text/javascript">
+                jQuery(document).ready(function() {
+
+                    jQuery(function() {
+
+                        var type = '1';
+
+                        jQuery('#metric').on('change', function() {
+                            type = jQuery(this).attr('value');
+                            jQuery('#cto').attr('value', '');
+                            jQuery('#cfrom').attr('value', '');
+                        });
+
+                        jQuery('#cfrom').on('keyup', function() {
+                            var val = jQuery(this).val();
+                            val = val.replace(/[^0-9\.]+/g, '');
+                            jQuery(this).attr('value', val);
+
+                            val = getMulti(type, jQuery(this).attr('value'));
+                            jQuery('#cto').attr('value', val);
+                        });
+
+
+                    });
+
+                    function getMulti(t, val) {
+                        var m;
+                        switch (t) {
+                            case '1':
+                                m = val * 0.03937;
+                                break;
+                            case '2':
+                                m = val * 25.4;
+                                break;
+                            case '3':
+                                m = val * 3.281;
+                                break;
+                            case '4':
+                                m = val * 0.3048;
+                                break;
+                            case '5':
+                                m = val / 2.2;
+                                break;
+                            case '6':
+                                m = val * 0.002205;
+                                break;
+                            case '7':
+                                m = val * 0.9072;
+                                break;
+                            case '8':
+                                m = val * 1.1023;
+                                break;
+                            case '9':
+                                m = val * 145.03773800721814;
+                                break;
+                            default:
+                                m = '0';
+                        }
+                        return m;
+                    }
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
