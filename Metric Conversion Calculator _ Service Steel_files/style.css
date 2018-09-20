@@ -113,7 +113,7 @@ ul.calc-list li {
 	max-width: 800px;
 	line-height: 50px;
 	vertical-align: middle;
-	border: 1px solid #eaeaea;
+	/*border: 1px solid #eaeaea;*/
 	/* margin: 0px auto ;*/
 	padding-bottom:30px;
 }

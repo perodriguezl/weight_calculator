@@ -20,7 +20,7 @@
                 <div class="black-body">
                     <div class="calcbody wpf">
                         <div id="math-form">
-                            <select id="metric" class="metric-select">
+                            <select id="metric" class="metric-select" style="padding:12px 14px 12px 20px;">
                                 <option value="1" selected="">SQUARE &amp; RECTANGLES BAR</option>
                                 <option value="2">HEXAGON TUBE</option>
                                 <option value="3">OCTAGON</option>
@@ -30,6 +30,7 @@
                                 <option value="7">SQUARES RECTANGLES TUBE</option>
                                 <option value="8">HEXAGONAL BAR</option>
                             </select>
+                            <br>
                             <br>
                             <div id="almn_select" class="almn">
                                 <span class="small">Aluminum</span>
@@ -102,6 +103,7 @@
                     jQuery(document).ready(function() {
                         jQuery('.guage').hide();
                         jQuery('.od').hide();
+                        jQuery('#almn_select').hide();
                         jQuery(function() {
 
                             var type = '1';
