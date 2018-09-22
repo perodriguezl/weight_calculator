@@ -21,14 +21,15 @@
                     <div class="calcbody wpf">
                         <div id="math-form">
                             <select id="metric" class="metric-select" style="padding:12px 14px 12px 20px;">
-                                <option value="1" selected="">SQUARE &amp; RECTANGLES BAR</option>
-                                <option value="2">HEXAGON TUBE</option>
-                                <option value="3">OCTAGON</option>
-                                <option value="4">OCTAGON BAR</option>
-                                <option value="5">ROUND TUBE</option>
-                                <option value="6">ROUND BAR</option>
-                                <option value="7">SQUARES RECTANGLES TUBE</option>
-                                <option value="8">HEXAGONAL BAR</option>
+                                <option value="5">TUBING ROUND</option>
+                                <option value="6">BAR ROUND</option>
+                                <option value="51">TUBING SQUARE</option>
+                                <option value="52">TUBING RECTANGULAR</option>
+                                <option value="61">BAR SQUARE</option>
+                                <option value="62">BAR FLAT</option>
+                                <option value="63">BAR HEX (ACROSS FLATS)</option>
+                                <option value="64">SQUARE BLOCK</option>
+                                <option value="65">RECTANGULAR BLOCK</option>
                             </select>
                             <br>
                             <br>
@@ -74,6 +75,14 @@
                                     <input type="text" id="od" class="od formcalc" value="" style="display: inline-block;">
                                 </li>
                                 <li class="fcfield">
+                                    <span class="large od1 formcalc" style="display: block;">Outside Diameter (1)</span>
+                                    <input type="text" id="od1" class="od1 formcalc" value="" style="display: inline-block;">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large od2 formcalc" style="display: block;">Outside Diameter (2)</span>
+                                    <input type="text" id="od2" class="od2 formcalc" value="" style="display: inline-block;">
+                                </li>
+                                <li class="fcfield">
                                     <span class="large id formcalc" style="display: none;">Inside Diameter</span>
                                     <input type="text" id="id" class="id formcalc" value="" style="display: none;">
                                 </li>
@@ -81,8 +90,16 @@
                                     <span class="large wall formcalc" style="display: none;">Wall</span>
                                     <input type="text" id="wall" class="wall formcalc" value="" style="display: none;">
                                 </li>
+                                <li class="fcfield">
+                                    <span class="large qty formcalc" style="display: none;">QTY (IN)</span>
+                                    <input type="text" id="qty" class="qty formcalc" value="" style="display: none;">
+                                </li>
                                 <li class="wpf-calc">
                                     <input type="button" name="calc" id="calc" class="total" value="Calculate">
+                                </li>
+                                <li class="fcfield">
+                                    <span class="large wt_ft">WT/FT</span>
+                                    <input type="text" id="wt_ft" class="wt_ft" value="">
                                 </li>
                                 <li class="fcfield">
                                     <span class="large total">Total</span>
@@ -90,8 +107,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="clearfix"></div>
-                        <p class="real_small">*For exact requirements contact our sales person.</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -103,6 +118,8 @@
                     jQuery(document).ready(function() {
                         jQuery('.guage').hide();
                         jQuery('.od').hide();
+                        jQuery('.od1').hide();
+                        jQuery('.od2').hide();
                         jQuery('#almn_select').hide();
                         jQuery(function() {
 
@@ -196,26 +213,160 @@
                                         break;
 
                                     case '5':
-
-                                        var total = ((jQuery('#od').val() - jQuery('#wall').val()) * jQuery('#wall').val()) * 10.68;
+                                        var a5 = jQuery('#od').val();
+                                        var b5 = jQuery('#id').val();
+                                        var c5 = jQuery('#qty').val();
+                                        
+                                        var wt_ft = (a5-((a5-b5)/2))*((a5-b5)/2)*10.68;
+                                        var total = c5 /12 * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
                                             total = total * guage;
                                         }
 
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '64':
+                                        var A33 = jQuery('#od').val();
+                                        var B33 = jQuery('#id').val();
+                                        var C33 = jQuery('#qty').val();
+                                        
+                                        var wt_ft = (A33*A33*3.4032)-(B33*B33*2.6729);
+                                        var total = C33 /12 * wt_ft;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '51':
+                                        var A13 = jQuery('#od').val();
+                                        var B13 = jQuery('#wall').val();
+                                        var C13 = jQuery('#qty').val();
+
+                                        console.log([
+                                            A13, B13, C13
+                                            ]);
+                                        
+                                        var wt_ft = (A13-B13)*B13*13.6;
+                                        var total = C13 /12 * wt_ft;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+
+                                    case '52':
+                                        var A17 = Number(jQuery('#od1').val());
+                                        var B17 = Number(jQuery('#od2').val());
+                                        var C17 = Number(jQuery('#wall').val());
+                                        var D17 = Number(jQuery('#qty').val());
+
+
+                                        
+                                        var wt_ft = (((A17+B17)/2)-C17)*C17*13.6;
+                                        var total = D17 /12 * wt_ft;
+
+                                        console.log((((A17+B17)/2)-C17)*C17*13.6);
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+
+                                    case '65':
+                                        var A37 = Number(jQuery('#od1').val());
+                                        var B37 = Number(jQuery('#od2').val());
+                                        var C37 = Number(jQuery('#id').val());
+                                        var D37 = Number(jQuery('#qty').val());
+
+                                        var wt_ft = (A37*B37*3.4032)-(C37*C37*2.6729);
+                                        var total = D37 /12 * wt_ft;
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
                                         jQuery('#total').attr('value', total.toFixed(3));
 
                                         break;
 
                                     case '6':
+                                        var a9 = jQuery('#od').val();
+                                        var b9 = jQuery('#qty').val();
 
-                                        var total = jQuery('#od').val() * jQuery('#od').val() * 2.6729;
+                                        var wt_ft = a9 * a9 * 2.6729;
+                                        var total = wt_ft / 12 * b9;
 
                                         var guage = alm();
                                         if (guage) {
                                             total = total * guage;
                                         }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '61':
+                                        var A21 = jQuery('#od').val();
+                                        var B21 = jQuery('#qty').val();
+
+                                        var wt_ft = A21 * A21 * 3.4032;
+                                        var total = B21 / 12 * wt_ft;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '62':
+                                        var A25 = jQuery('#width').val();
+                                        var B25 = jQuery('#thick').val();
+                                        var C25 = jQuery('#qty').val();
+
+                                        var wt_ft = A25*B25*3.403;
+                                        var total = C25 / 12 * wt_ft;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
+                                        jQuery('#total').attr('value', total.toFixed(3));
+
+                                        break;
+
+                                    case '63':
+                                        var A29 = jQuery('#od').val();
+                                        var B29 = jQuery('#qty').val();
+
+                                        var wt_ft = 2.9473*(A29*A29);
+                                        var total = B29 / 12 * wt_ft;
+
+                                        var guage = alm();
+                                        if (guage) {
+                                            total = total * guage;
+                                        }
+
+                                        jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
                                         jQuery('#total').attr('value', total.toFixed(3));
 
                                         break;
@@ -256,8 +407,32 @@
                                     case '2':
                                     case '3':
                                     case '5':
+                                    case '64':
+                                        jQuery('.od').show();
+                                        jQuery('.id').show();
+                                        jQuery('.qty').show();
+                                        break;
+                                    case '5':
                                         jQuery('.od').show();
                                         jQuery('.wall').show();
+                                        jQuery('.qty').show();
+                                        break;
+                                    case '51':
+                                        jQuery('.od').show();
+                                        jQuery('.wall').show();
+                                        jQuery('.qty').show();
+                                        break;
+                                    case '52':
+                                        jQuery('.od1').show();
+                                        jQuery('.od2').show();
+                                        jQuery('.wall').show();
+                                        jQuery('.qty').show();
+                                        break;
+                                    case '65':
+                                        jQuery('.od1').show();
+                                        jQuery('.od2').show();
+                                        jQuery('.id').show();
+                                        jQuery('.qty').show();
                                         break;
 
                                     case '4':
@@ -265,7 +440,15 @@
 
                                         break;
                                     case '6':
+                                    case '61':
+                                    case '63':
                                         jQuery('.od').show();
+                                        jQuery('.qty').show();
+                                        break;
+                                    case '62':
+                                        jQuery('.width').show();
+                                        jQuery('.thick').show();
+                                        jQuery('.qty').show();
                                         break;
                                     case '7':
                                         jQuery('.width').show();
