@@ -25,6 +25,21 @@ Imported Calculator Styles from Old Site
 	margin-top: 15px !important;
 }
 
+.btn-change1{
+    height: 50px;
+    width: 100px;
+    background: #8ac440;
+    margin: 20px;
+    float: left;
+    border: 0px;
+    color: #fff;
+    box-shadow: 0 0 1px #ccc;
+    -webkit-transition-duration: 0.5s;
+}
+.btn-change1:hover{
+    -webkit-box-shadow: 50px 0px 0 0 #6e6e6e inset , -50px 0px 0 0 #6e6e6e inset;
+}
+
 .metric-input {
 	margin-top: 15px;
 }
