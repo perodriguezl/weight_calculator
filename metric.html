@@ -5,6 +5,7 @@
     <script type="text/javascript" src="./Metric Conversion Calculator _ Service Steel_files/jquery-migrate.min.js"></script>
     <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/style.css" type="text/css" media="all">
     <link rel="stylesheet" id="theme-styles-css" href="./Metric Conversion Calculator _ Service Steel_files/core-styles.css" type="text/css" media="all">
+    <script src="js/atps.js"></script>
 </head>
 
 <body>
@@ -18,19 +19,38 @@
             <div class="black-body">
                 <div class="calcbody metric">
                     <select id="metric" class="metric-select">
-                        <option value="1" selected="">Millimeters to Inches</option>
+                        <option value="rc-bhn">Rc to BHN</option>
+                        <option value="rc-rb">Rc to Rb</option>
+                        <option value="bhn-rc">BHN to Rc</option>
+                        <option value="bhn-rb">BHN to Rb</option>
+                        <option value="rb-bhn">Rb to BHN</option>
+                        <option value="rb-rc">Rb to Rc</option>
+                        <option value="13">F to C</option>
+                        <option value="14">C to F</option>
+                        <option value="1">Millimeters to Inches</option>
                         <option value="2">Inches to Millimeters</option>
                         <option value="3">Meters to Feet</option>
                         <option value="4">Feet to Meters</option>
-                        <option value="5">Lbs to Kilograms</option>
-                        <option value="6">Grams to Lbs</option>
-                        <option value="7">Short Tons to Metric Tons</option>
-                        <option value="8">Metric Tons to Short Tons</option>
-                        <option value="9">MPa to PSI</option>
+                        <option value="41">FT/LB to JOULES</option>
+                        <option value="42">JOULES to FT/LB</option>
+                        <option value="43">MPa to PSI</option>
+                        <option value="44">PSI to MPa</option>
+                        <option value="45">N/MMsq to PSI</option>
+                        <option value="46">PSI to N/MMsq</option>
+                        <option value="5">LBS to KGS</option>
+                        <option value="6">KGS to LBS</option>
+                        <option value="61">LBS to NEWTON</option>
+                        <option value="62">NEWTON to LBS</option>
+                        <option value="7">LBS to TONS (SHORT)</option>
+                        <option value="71">LBS to TONS (LONG)</option>
+                        <option value="72">LBS to TONS (METRIC)</option>
+                        <option value="73">TONS (SHORT) to LBS</option>
+                        <option value="74">TONS (LONG) to LBS</option>
+                        <option value="75">TONS (METRIC) to LBS</option>
                     </select>
-                    <input type="text" id="cfrom" class="metric-input" value="1" size="8">
+                    <input type="text" id="cfrom" class="metric-input" value="3.3" size="8">
                     <span class="large metric-label"> = </span>
-                    <input type="text" id="cto" class="metric-input" value="25.4" readonly="true">
+                    <input type="text" id="cto" class="metric-input" value="163" readonly="true">
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -43,7 +63,7 @@
 
                     jQuery(function() {
 
-                        var type = '1';
+                        var type = "rc-bhn";
 
                         jQuery('#metric').on('change', function() {
                             type = jQuery(this).attr('value');
@@ -79,19 +99,71 @@
                                 m = val * 0.3048;
                                 break;
                             case '5':
-                                m = val / 2.2;
+                                m = (val * 0.453592).toFixed(3);
                                 break;
                             case '6':
-                                m = val * 0.002205;
+                                m = (val * 2.204623).toFixed(3);
                                 break;
                             case '7':
-                                m = val * 0.9072;
+                                m = val / 2000;
                                 break;
                             case '8':
                                 m = val * 1.1023;
                                 break;
                             case '9':
                                 m = val * 145.03773800721814;
+                                break;
+                            case '13':
+                                m = ((val - 32) / 1.80).toFixed(3);
+                                break;
+                            case '14':
+                                m = ((val * 1.8) + 32).toFixed(3);
+                                break;
+                            case '41':
+                                m = ((val * 1.355818)).toFixed(3);
+                                break;
+                            case '42':
+                                m = ((val * 0.737562)).toFixed(3);
+                                break;
+                            case '43':
+                                m = ((val * 145)).toFixed(3);
+                                break;
+                            case '44':
+                                m = ((val / 145)).toFixed(3);
+                                break;
+                            case '45':
+                                m = ((val * 145)).toFixed(3);
+                                break;
+                            case '46':
+                                m = ((val / 145)).toFixed(3);
+                                break;
+                            case '61':
+                                m = ((val * 4.44822)).toFixed(3);
+                                break;
+                            case '62':
+                                m = ((val * 0.224809)).toFixed(3);
+                                break;
+                            case '71':
+                                m = ((val / 2240)).toFixed(3);
+                                break;
+                            case '72':
+                                m = ((val / 2204.6)).toFixed(3);
+                                break;
+                            case '73':
+                                m = ((val * 2000)).toFixed(3);
+                                break;
+                            case '74':
+                                m = ((val * 2240)).toFixed(3);
+                                break;
+                            case '75':
+                                m = ((val * 2204.6)).toFixed(3);
+                                break;  
+                            case "rc-bhn":
+                            case "rc-rb":
+                            case "bhn-rc":
+                            case "bhn-rb":
+                            case "rb-bhn":
+                                m = findHardnessValue(val, t);
                                 break;
                             default:
                                 m = '0';
@@ -103,6 +175,20 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function findHardnessValue (val, t) {
+            var found = 0;
+            jQuery.each(hardness, function(key, value) {
+                if (val == value[t.split("-")[0]]) {
+                    found = value[t.split("-")[1]];
+                }
+            });
+            if (found != 0) {
+                return found;
+            }
+            return "OUT OF RANGE";
+        }
+    </script>
 </body>
 
 </html>

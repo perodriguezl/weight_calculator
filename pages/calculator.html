@@ -62,16 +62,14 @@
                                 </div>
                                 <div class="tab-pane fade" id="messages">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Collapsible Accordion Panel Group
-                                        </div>
                                         <!-- .panel-heading -->
                                         <div class="panel-body">
-                                            <div class="panel-group" id="accordion">
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">LINE PIPE SIZES</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <span class="glyphicon glyphicon-plus"></span> LINE PIPE SIZES</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseOne" class="panel-collapse collapse">
@@ -101,7 +99,7 @@
                                                                         <input id='n200' type="text" class="form-control" readonly="true">
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <label style="font-size: 1rem">Nickel 200 (WT/FT)</label>
+                                                                        <label style="font-size: 1rem">Nickel 201 (WT/FT)</label>
                                                                         <input id='n201' type="text" class="form-control" readonly="true">
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -132,7 +130,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">API TUBING / PIPES SIZES</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                <span class="glyphicon glyphicon-plus"></span> API TUBING / PIPES SIZES</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseTwo" class="panel-collapse collapse">
@@ -170,7 +169,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">THEORETICAL BURSTING AND BULGING PRESSURES USING BARLOW'S FORMULA</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                <span class="glyphicon glyphicon-plus"></span> THEORETICAL BURSTING AND BULGING PRESSURES USING BARLOW'S FORMULA</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseThree" class="panel-collapse collapse">
@@ -242,7 +242,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">FIGURE MIN WALL SIZE BASED ON OD AND WORKING PRESSURE USING BARLOW'S FORMULA</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                <span class="glyphicon glyphicon-plus"></span> FIGURE MIN WALL SIZE BASED ON OD AND WORKING PRESSURE USING BARLOW'S FORMULA</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseFour" class="panel-collapse collapse">
@@ -277,7 +278,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">IF YOU HAVE OD & ID THIS FIGURES THE WALL</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                <span class="glyphicon glyphicon-plus"></span> IF YOU HAVE OD & ID THIS FIGURES THE WALL</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseFive" class="panel-collapse collapse">
@@ -307,7 +309,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">IF YOU KNOW THE OD AND THE WT/FT THIS WILL FIGURE THE WALL</a>
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                <span class="glyphicon glyphicon-plus"></span> IF YOU KNOW THE OD AND THE WT/FT THIS WILL FIGURE THE WALL</a>
                                                         </h4>
                                                     </div>
                                                     <div id="collapseSix" class="panel-collapse collapse">
@@ -406,6 +409,11 @@
             $("#fnws_mwall").val(($("#fnws_working").val() * $("#fnws_od").val() / 2 / $("#fnws_myield").val()));
         });
         $( document ).ready(function() {
+            $('.collapse').on('shown.bs.collapse', function(){
+                $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            }).on('hidden.bs.collapse', function(){
+                $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });   
             $.each(measures, function(key, value) {
                 $('#nps').append($('<option>', {
                     value: value,
@@ -468,7 +476,7 @@
                 if (value.od == $('#od2').val() && value.weight == $('#weight').val() ) {
                     $("#atps_id").val(value.id);
                     console.log($('#weight').val());
-                    $("#atps_wall").val((($('#od2').val()-$('#weight').val())/2).toFixed(3));
+                    $("#atps_wall").val((($('#od2').val()-$('#atps_id').val())/2).toFixed(3));
                     $("#atps_drift").val(value.drift);
                 }
             });
@@ -489,10 +497,10 @@
             $("#i600").val(($("#cas").val()*1.0742).toFixed(3));
         }
         function calcI800() {
-            $("#i800").val(($("#cas").val()*1.0742).toFixed(3));
+            $("#i800").val(($("#cas").val()*1.0247).toFixed(3));
         }
         function calcI825() {
-            $("#i825").val(($("#cas").val()*1.0742).toFixed(3));
+            $("#i825").val(($("#cas").val()*1.0389).toFixed(3));
         }
         function calcBulge() {
             $("#tbab_bulge").val((2*$("#tbab_wall").val()*$("#tbab_myield").val()/$("#tbab_od").val()).toFixed(0));
