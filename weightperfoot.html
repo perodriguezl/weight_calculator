@@ -31,8 +31,6 @@
                                 <option value="64">SQUARE BLOCK</option>
                                 <option value="65">RECTANGULAR BLOCK</option>
                             </select>
-                            <br>
-                            <br>
                             <div id="almn_select" class="almn">
                                 <span class="small">Aluminum</span>
                                 <input type="checkbox" name="alm" id="alm">
@@ -55,6 +53,12 @@
                                     <option value="0.3462">6063</option>
                                     <option value="0.3568">7075</option>
                                     <option value="0.3604">7178</option>
+                                </select>
+                            </div>
+                            <div class="lu">
+                                <select id="lu" class="lu metric-select">
+                                    <option value="12">Inches</option>
+                                    <option value="1">Feet</option>
                                 </select>
                             </div>
                             <ul class="fcfields">
@@ -123,10 +127,12 @@
                         jQuery('#almn_select').hide();
                         jQuery(function() {
 
-                            var type = '1';
+                            var type = '5';
 
-                            jQuery('.width').show();
-                            jQuery('.thick').show();
+                            jQuery('.od').show();
+                            jQuery('.id').show();
+                            jQuery('.qty').show();
+                            jQuery('.wt_ft').show();
                             jQuery('.total').show();
 
                             jQuery('#metric').live('change', function() {
@@ -218,7 +224,7 @@
                                         var c5 = jQuery('#qty').val();
                                         
                                         var wt_ft = (a5-((a5-b5)/2))*((a5-b5)/2)*10.68;
-                                        var total = c5 /12 * wt_ft;
+                                        var total = c5 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
@@ -236,7 +242,7 @@
                                         var C33 = jQuery('#qty').val();
                                         
                                         var wt_ft = (A33*A33*3.4032)-(B33*B33*2.6729);
-                                        var total = C33 /12 * wt_ft;
+                                        var total = C33 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
@@ -258,7 +264,7 @@
                                             ]);
                                         
                                         var wt_ft = (A13-B13)*B13*13.6;
-                                        var total = C13 /12 * wt_ft;
+                                        var total = C13 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
@@ -280,7 +286,7 @@
 
                                         
                                         var wt_ft = (((A17+B17)/2)-C17)*C17*13.6;
-                                        var total = D17 /12 * wt_ft;
+                                        var total = D17 / jQuery('#lu').val() * wt_ft;
 
                                         console.log((((A17+B17)/2)-C17)*C17*13.6);
 
@@ -295,7 +301,7 @@
                                         var D37 = Number(jQuery('#qty').val());
 
                                         var wt_ft = (A37*B37*3.4032)-(C37*C37*2.6729);
-                                        var total = D37 /12 * wt_ft;
+                                        var total = D37 / jQuery('#lu').val() * wt_ft;
 
                                         jQuery('#wt_ft').attr('value', wt_ft.toFixed(3));
                                         jQuery('#total').attr('value', total.toFixed(3));
@@ -307,7 +313,7 @@
                                         var b9 = jQuery('#qty').val();
 
                                         var wt_ft = a9 * a9 * 2.6729;
-                                        var total = wt_ft / 12 * b9;
+                                        var total = wt_ft / jQuery('#lu').val() * b9;
 
                                         var guage = alm();
                                         if (guage) {
@@ -324,7 +330,7 @@
                                         var B21 = jQuery('#qty').val();
 
                                         var wt_ft = A21 * A21 * 3.4032;
-                                        var total = B21 / 12 * wt_ft;
+                                        var total = B21 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
@@ -342,7 +348,7 @@
                                         var C25 = jQuery('#qty').val();
 
                                         var wt_ft = A25*B25*3.403;
-                                        var total = C25 / 12 * wt_ft;
+                                        var total = C25 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
@@ -359,7 +365,7 @@
                                         var B29 = jQuery('#qty').val();
 
                                         var wt_ft = 2.9473*(A29*A29);
-                                        var total = B29 / 12 * wt_ft;
+                                        var total = B29 / jQuery('#lu').val() * wt_ft;
 
                                         var guage = alm();
                                         if (guage) {
