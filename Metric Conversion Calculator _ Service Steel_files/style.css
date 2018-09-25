@@ -37,7 +37,8 @@ Imported Calculator Styles from Old Site
     -webkit-transition-duration: 0.5s;
 }
 .btn-change1:hover{
-    -webkit-box-shadow: 50px 0px 0 0 #6e6e6e inset , -50px 0px 0 0 #6e6e6e inset;
+    -webkit-box-shadow: 50px 0px 0 0 #f5f2e6 inset , -50px 0px 0 0 #f5f2e6 inset;
+    color: #8ac440;
 }
 
 .metric-input {
