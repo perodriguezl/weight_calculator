@@ -179,7 +179,7 @@
         function findHardnessValue (val, t) {
             var found = 0;
             jQuery.each(hardness, function(key, value) {
-                if (val == value[t.split("-")[0]]) {
+                if (parseInt(val) == (parseFloat(value[t.split("-")[0]])).toFixed(0)) {
                     found = value[t.split("-")[1]];
                 }
             });
